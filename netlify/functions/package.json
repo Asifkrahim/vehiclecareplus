@@ -1,0 +1,10 @@
+{
+  "name": "vehiclecare-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for VehicleCare+",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@supabase/supabase-js": "^2.49.8",
+    "nodemailer": "^6.10.1"
+  }
+}

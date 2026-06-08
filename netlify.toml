@@ -1,0 +1,55 @@
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "dist"
+  functions = "../netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirect all /api/* calls to matching Netlify functions
+[[redirects]]
+  from   = "/api/vehicles/intervals"
+  to     = "/.netlify/functions/vehicles-intervals"
+  status = 200
+
+[[redirects]]
+  from   = "/api/vehicles/:id/logs/:logId"
+  to     = "/.netlify/functions/vehicle-logs"
+  status = 200
+
+[[redirects]]
+  from   = "/api/vehicles/:id/logs"
+  to     = "/.netlify/functions/vehicle-logs"
+  status = 200
+
+[[redirects]]
+  from   = "/api/vehicles/:id"
+  to     = "/.netlify/functions/vehicles"
+  status = 200
+
+[[redirects]]
+  from   = "/api/vehicles"
+  to     = "/.netlify/functions/vehicles"
+  status = 200
+
+[[redirects]]
+  from   = "/api/ai/chat"
+  to     = "/.netlify/functions/ai-chat"
+  status = 200
+
+[[redirects]]
+  from   = "/api/notify/test"
+  to     = "/.netlify/functions/notify-test"
+  status = 200
+
+[[redirects]]
+  from   = "/api/health"
+  to     = "/.netlify/functions/health"
+  status = 200
+
+# SPA fallback — React Router handles client-side routing
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { supabase } from '../lib/supabase';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// In production (Netlify), VITE_API_URL is not set — calls go to the same origin
+// via netlify.toml redirects: /api/* → /.netlify/functions/*
+// In local dev, set VITE_API_URL=http://localhost:5000 in frontend/.env
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -49,8 +52,10 @@ api.interceptors.response.use(
 );
 
 // Vehicle API
+// Routes match netlify.toml redirects: /api/vehicles → /.netlify/functions/vehicles
 export const vehicleAPI = {
   getAll: () => api.get('/api/vehicles'),
+  getIntervals: () => api.get('/api/vehicles/intervals'),
   add: (data) => api.post('/api/vehicles', data),
   updateKm: (id, current_km) => api.put(`/api/vehicles/${id}`, { current_km }),
   delete: (id) => api.delete(`/api/vehicles/${id}`),
@@ -62,6 +67,11 @@ export const vehicleAPI = {
 // AI Chat API
 export const aiAPI = {
   chat: (message, history) => api.post('/api/ai/chat', { message, history }),
+};
+
+// Notify API
+export const notifyAPI = {
+  testEmail: () => api.post('/api/notify/test'),
 };
 
 export default api;
