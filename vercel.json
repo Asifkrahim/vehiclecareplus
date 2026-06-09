@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "cd api && npm install",
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/vehicles/intervals",               "destination": "/api/vehicles-intervals" },
+    { "source": "/api/vehicles/:id/logs/:logId",         "destination": "/api/vehicle-logs?id=:id&logId=:logId" },
+    { "source": "/api/vehicles/:id/logs",                "destination": "/api/vehicle-logs?id=:id" },
+    { "source": "/api/vehicles/:id",                     "destination": "/api/vehicles?id=:id" },
+    { "source": "/api/ai/chat",                          "destination": "/api/ai-chat" },
+    { "source": "/api/notify/test",                      "destination": "/api/notify-test" },
+    { "source": "/api/health",                           "destination": "/api/health" },
+    { "source": "/((?!api/).*)",                         "destination": "/index.html" }
+  ]
+}
