@@ -2,9 +2,6 @@
   "name": "vehiclecare-api",
   "version": "1.0.0",
   "description": "Vercel Serverless API for VehicleCare+",
-  "engines": {
-    "node": "22.x"
-  },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@supabase/supabase-js": "^2.49.8",
